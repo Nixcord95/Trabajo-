@@ -1,0 +1,66 @@
+======================================================================
+         GUÍA DE INSTALACIÓN Y USO - SAFEBOX SECURITY SYSTEM
+======================================================================
+
+Este sistema web es un gestor de seguridad automatizado y personalizado 
+para el control de accesos de usuarios, desarrollado en PHP, MySQL y CSS3 
+con un diseño moderno en Modo Oscuro (Dark Mode).
+
+----------------------------------------------------------------------
+1. REQUISITOS PREVIOS E INSTALACIÓN
+----------------------------------------------------------------------
+* Tener instalado XAMPP (u otro servidor local compatible con Apache y MySQL).
+* Mover la carpeta del proyecto 'safebox_seguridad' completa dentro de la 
+  ruta del servidor local:
+  C:\xampp\htdocs\
+
+----------------------------------------------------------------------
+2. CONFIGURACIÓN DE LA BASE DE DATOS
+----------------------------------------------------------------------
+1. Abre tu navegador web e ingresa a: http://localhost/phpmyadmin/
+2. En la barra lateral izquierda, haz clic en "Nueva".
+3. Crea una base de datos con el nombre exacto: safebox_db
+4. Una vez creada, entra a ella y haz clic en la pestaña superior "SQL".
+5. Pega el siguiente código de estructura y presiona el botón "Continuar":
+
+CREATE TABLE cuentas_usuario (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    num_documento VARCHAR(20) NOT NULL,
+    nombre_completo VARCHAR(100) NOT NULL,
+    email_acceso VARCHAR(100) NOT NULL UNIQUE,
+    clave_encriptada VARCHAR(255) NOT NULL,
+    creado_el TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+----------------------------------------------------------------------
+3. FLUJO DE USO DEL PROGRAMA
+----------------------------------------------------------------------
+
+Paso 1: Registro de un nuevo usuario
+* Abre el navegador e ingresa a: http://localhost/safebox_seguridad/registro.php
+* Rellena los campos con tu Cédula, Nombre Completo, Correo Electrónico 
+  y la Contraseña elegida.
+* Haz clic en "Generar Alta de Usuario". El sistema encriptará la clave 
+  automáticamente en la base de datos usando un algoritmo seguro de Hash.
+
+Paso 2: Autenticación e Inicio de Sesión
+* Dirígete a la pantalla de Login: http://localhost/safebox_seguridad/login.php
+* Introduce el Correo Electrónico y la Clave de Seguridad registradas.
+* Haz clic en "Validar Identidad". El sistema comprobará tus credenciales y, 
+  si son correctas, creará una sesión segura en el servidor.
+
+Paso 3: Panel de Seguridad (Perfil)
+* Al ingresar, el sistema te redirigirá a 'perfil.php'.
+* Podrás visualizar tus datos actuales cargados directamente desde la base de datos.
+* Nota de seguridad: El campo "Cédula de Identidad" se encuentra protegido y 
+  bloqueado (no editable) para garantizar la integridad de los registros.
+* Desde este panel puedes actualizar tu Nombre o Correo, o navegar hacia la 
+  sección para "Modificar Clave de Acceso".
+
+Paso 4: Desconexión del Sistema
+* Para salir de forma segura y destruir la sesión activa en el servidor, 
+  haz clic en el enlace "Desconectar Sistema" en la parte inferior del panel.
+
+----------------------------------------------------------------------
+DESARROLLADO CON LOGICA DE CONTROL DE SESIONES Y ENCRIPTACIÓN INTEGRADA
+======================================================================
